@@ -41,7 +41,6 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "jszip": "^3.2.2",
-    "node": "^13.5.0"
+    "jszip": "^3.2.2"
   }
 }
