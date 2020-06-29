@@ -7,13 +7,12 @@ const TIMEOUT_MS = 5000
 const KEEPALIVE_INTERVAL_MS = 5000
 
 class DownZip {
-    constructor(){
+    constructor({ scope }){
         this.worker = null
+        scope = scope || `./${SCOPE}/`;
 
         // Register service worker and let it intercept our scope
-        registerServiceWorker({
-            scope: `./${SCOPE}/`
-        }).then(result => {
+        registerServiceWorker({ scope }).then(result => {
             Utils.log('[DownZip] Service worker registered successfully:', result)
             this.worker = result.installing || result.active
         }).catch(error => {
@@ -27,6 +26,10 @@ class DownZip {
     }
 
     sendMessage(command, data, port){
+        if(!this.worker){
+            return;
+        }
+
         this.worker.postMessage({
             command,
             data
