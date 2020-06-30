@@ -9,7 +9,7 @@ const KEEPALIVE_INTERVAL_MS = 5000
 class DownZip {
     constructor({ scope }){
         this.worker = null
-        this.scope = scope = scope || `./${SCOPE}/`;
+        this.scope = scope = scope || `./${SCOPE}`;
         
 
         // Register service worker and let it intercept our scope
@@ -48,7 +48,7 @@ class DownZip {
         return new Promise(((resolve, reject) => {
             // Return download URL on acknowledge via messageChannel
             const messageChannel = new MessageChannel()
-            messageChannel.port1.addEventListener('message', () => resolve(`${this.scope}download-${id}`))
+            messageChannel.port1.addEventListener('message', () => resolve(`${this.scope}/download-${id}`))
             messageChannel.port1.start()
 
             // Init this task in our service worker
