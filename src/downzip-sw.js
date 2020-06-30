@@ -50,6 +50,8 @@ self.addEventListener('activate', () => {
 
 self.addEventListener('fetch', async (event) => {
     // Get URL and check if it is a download request
+    console.log('service handler processing url: ', event.request.url);
+
     const urlParts = event.request.url.split('/')
     const lastPart = urlParts[urlParts.length - 1]
     if(lastPart.includes('download-')) {
